@@ -1,4 +1,4 @@
-kehlet.cx
-=========
+www.kehlet.cx
+=============
 
-www.kehlet.cx web site
+This is my www.kehlet.cx web site/blog, hosted on GitHub Pages.
