@@ -1,0 +1,47 @@
+diff -ru ucarp-1.5.pristine/src/carp.c ucarp-1.5/src/carp.c
+--- ucarp-1.5.pristine/src/carp.c	Tue May  6 03:50:30 2008
++++ ucarp-1.5/src/carp.c	Wed Jun 18 16:10:31 2008
+@@ -50,9 +50,12 @@
+ 
+ static void carp_set_state(struct carp_softc *sc, int state)
+ {
++    int oldstate = sc->sc_state;
++
+     if ((int) sc->sc_state == state) {
+         return;
+     }
++    sc->sc_state = state; /* set me early, since spawn scripts can take a while to run */
+     switch (state) {
+     case INIT:
+         logfile(LOG_INFO, _("Switching to state: INIT"));
+@@ -59,7 +62,7 @@
+         break;
+     case BACKUP:
+         logfile(LOG_WARNING, _("Switching to state: BACKUP"));
+-        if ((sc->sc_state != INIT) || (neutral != 1)) {
++        if ((oldstate != INIT) || (neutral != 1)) {
+             (void) spawn_handler(dev_desc_fd, downscript);
+         }
+         break;
+@@ -72,7 +75,6 @@
+         logfile(LOG_ERR, _("Unknown state: [%d]"), (int) state);
+         abort();
+     }
+-    sc->sc_state = state;
+ }
+ 
+ void carp_hmac_prepare(struct carp_softc *sc)
+@@ -717,7 +719,12 @@
+             (unsigned int) hwaddr[0], (unsigned int) hwaddr[1],
+             (unsigned int) hwaddr[2], (unsigned int) hwaddr[3],
+             (unsigned int) hwaddr[4], (unsigned int) hwaddr[5]);
+-    if ((dev_desc = pcap_open_live(interface, ETHERNET_MTU, 0,
++    if ((dev_desc = pcap_open_live(interface, ETHERNET_MTU, 
++#if defined (__SVR4) && defined (__sun)
++                                   1, /* promiscuous on Solaris */
++#else
++                                   0, /* not promiscuous */
++#endif
+                                    CAPTURE_TIMEOUT, errbuf)) == NULL) {
+         logfile(LOG_ERR, _("Unable to open interface [%s]: %s"),
+                 interface == NULL ? "-" : interface, errbuf);

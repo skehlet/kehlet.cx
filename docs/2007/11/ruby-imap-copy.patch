@@ -1,0 +1,28 @@
+@@ -76,12 +81,17 @@
+   dest_info = {}
+   
+   dd 'analyzing existing messages...'
+-  dest.uid_fetch(dest.uid_search(['ALL']), ['ENVELOPE']).each do |data|
++  uids = dest.uid_search(['ALL'])
++  if uids.length > 0
++    dest.uid_fetch(uids, ['ENVELOPE']).each do |data|
+     dest_info[data.attr['ENVELOPE'].message_id] = true
+   end
++  end
+   
+   # Loop through all messages in the source folder.
+-  source.uid_fetch(source.uid_search(['ALL']), ['ENVELOPE']).each do |data|
++  uids = source.uid_search(['ALL'])
++  if uids.length > 0
++    source.uid_fetch(uids, ['ENVELOPE']).each do |data|
+     mid = data.attr['ENVELOPE'].message_id
+ 
+     # If this message is already in the destination folder, skip it.
+@@ -98,6 +108,7 @@
+     dest.append(dest_folder, msg.attr['RFC822'], msg.attr['FLAGS'],
+         msg.attr['INTERNALDATE'])
+   end
++  end
+   
+   source.close
+   dest.close

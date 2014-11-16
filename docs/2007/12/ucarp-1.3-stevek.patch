@@ -1,0 +1,185 @@
+diff -ru ucarp-1.3.pristine/src/carp.c ucarp-1.3/src/carp.c
+--- ucarp-1.3.pristine/src/carp.c	2007-07-04 08:17:12.000000000 -0700
++++ ucarp-1.3/src/carp.c	2007-12-19 16:50:18.000000000 -0800
+@@ -323,6 +323,10 @@
+ #ifdef DEBUG
+     logfile(LOG_DEBUG, "carp_setrun()");
+ #endif
++    if (gettimeofday(&now, NULL) != 0) {
++	logfile(LOG_WARNING, _("initializing now to gettimeofday() failed: %s"),
++		strerror(errno));
++    }
+     switch (sc->sc_state) {
+     case INIT:
+ 	carp_set_state(sc, BACKUP);
+@@ -560,14 +564,23 @@
+         case MASTER:
+             /*
+              * If we receive an advertisement from a master who's going to
+-             * be more frequent than us, go into BACKUP state.
++             * be the same or more frequent than us, go into BACKUP state.
++             * TBD: Improve this, e.g. base the winner off IP address, or 
++             * (like the latest OpenBSD ip_carp.c) base it off some value
++             * like a demote count.
+              */
+             if (timercmp(&ch_tv, &sc_tv, <=)) {
++                int sleep_time = random() % 10;
+                 sc.sc_ad_tmo.tv_sec = 0;
+                 carp_set_state(&sc, BACKUP);
+-                carp_setrun(&sc, 0);
+                 logfile(LOG_WARNING, _("Preferred master advertised: "
+                                        "going back to BACKUP state"));
++
++#ifdef DEBUG
++                logfile(LOG_DEBUG, "Sleeping for %d seconds...", sleep_time);
++#endif
++                sleep(sleep_time); /* random backoff period so we don't just flip flop back and forth */
++                carp_setrun(&sc, 0);
+             }
+             break;
+         case BACKUP:
+@@ -621,6 +634,18 @@
+     _exit(EXIT_SUCCESS);
+ }
+ 
++RETSIGTYPE sighandler_usr(const int sig)
++{
++    switch (sig) {
++        case SIGUSR1:
++            signalFlagEy=1;
++            break;
++        case SIGUSR2:
++            signalFlagEy=2;
++            break;
++    }
++}
++
+ char *build_bpf_rule(void)
+ {
+     static char rule[256];
+@@ -647,6 +672,7 @@
+     struct ifreq iface;
+     int fd;
+     int nfds;
++    int iface_running = 1;
+ 
+     sc.sc_vhid = vhid;
+     sc.sc_advbase = advbase;
+@@ -705,6 +731,8 @@
+         (void) signal(SIGQUIT, sighandler_exit);
+         (void) signal(SIGTERM, sighandler_exit);
+     }
++    (void) signal(SIGUSR1, sighandler_usr);
++    (void) signal(SIGUSR2, sighandler_usr);
+ 
+     if (gettimeofday(&now, NULL) != 0) {
+ 	logfile(LOG_WARNING, _("initializing now to gettimeofday() failed: %s"),
+@@ -735,10 +763,41 @@
+ 	    sc.sc_ad_tmo.tv_usec = 0;
+ 	    sc.sc_md_tmo.tv_sec = 0;
+ 	    sc.sc_md6_tmo.tv_usec = 0;
++            if (iface_running) {
++                iface_running = 0;
++            }
+ 	    sleep(SECONDS_TO_WAIT_AFTER_INTERFACE_IS_DOWN);
+ 	    continue;
+-	}
++	} else {
++            if (!iface_running) {
++                iface_running = 1;
++                carp_setrun(&sc, 0);
++            }
++        }
++#endif
++        if (signalFlagEy != 0) {
++            int flag = signalFlagEy;
++            signalFlagEy = 0;
++            switch (flag) {
++                case 1:
++                    logfile(LOG_INFO, "%s on %s id %d", 
++                            (sc.sc_state == BACKUP ? "BACKUP" : "MASTER"),
++                            interface, sc.sc_vhid);
++                    break;
++                case 2:
++#ifdef DEBUG
++                    logfile(LOG_DEBUG, "usr2(): Caught signal(usr2) considering going down");
+ #endif
++                    if (sc.sc_state != BACKUP) {
++                        carp_set_state(&sc, BACKUP);
++                        sleep(3); /* hold up a sec... */
++                        carp_setrun(&sc, 0); /* now listen for 3 heartbeats, as usual */
++                        continue;
++                    }
++                    break;
++            }
++        }
++
+         nfds = poll(pfds, (nfds_t) 1, sc.sc_advbase * 1000);
+         if (nfds == -1) {
+ 	    if (errno == EINTR) {
+diff -ru ucarp-1.3.pristine/src/spawn.c ucarp-1.3/src/spawn.c
+--- ucarp-1.3.pristine/src/spawn.c	2007-07-04 06:34:59.000000000 -0700
++++ ucarp-1.3/src/spawn.c	2007-12-19 16:45:33.000000000 -0800
+@@ -21,11 +21,15 @@
+     if (pid == (pid_t) 0) {
+         (void) close(dev_desc_fd);
+         execl(script, script, interface, vaddr_arg, xparam, (char *) NULL);
+-	logfile(LOG_ERR, _("Unable to exec %s %s: %s"), script, interface,
+-		strerror(errno));
++	logfile(LOG_ERR, _("Unable to exec %s %s %s%s%s: %s"), 
++                script, interface, vaddr_arg, 
++                (xparam ? " " : ""), (xparam ? xparam : ""), 
++                strerror(errno));
+         _exit(EXIT_FAILURE);
+     } else if (pid != (pid_t) -1) {
+-        logfile(LOG_WARNING, _("Spawning [%s %s]"), script, interface);
++        logfile(LOG_WARNING, _("Spawning [%s %s %s%s%s]"), 
++                script, interface, vaddr_arg, 
++                (xparam ? " " : ""), (xparam ? xparam : ""));
+ #ifdef HAVE_WAITPID
+ 	{
+ 	    while (waitpid(pid, NULL, 0) == (pid_t) -1 && errno == EINTR);
+diff -ru ucarp-1.3.pristine/src/ucarp.c ucarp-1.3/src/ucarp.c
+--- ucarp-1.3.pristine/src/ucarp.c	2007-07-04 06:34:59.000000000 -0700
++++ ucarp-1.3/src/ucarp.c	2007-12-19 16:45:33.000000000 -0800
+@@ -221,7 +221,7 @@
+             }
+             break;
+         }
+-	case 'm': {
++	case 'x': {
+ 	    free(xparam);
+ 	    if ((xparam = strdup(optarg)) == NULL) {
+                 die_mem();
+diff -ru ucarp-1.3.pristine/src/ucarp.h ucarp-1.3/src/ucarp.h
+--- ucarp-1.3.pristine/src/ucarp.h	2007-07-04 07:24:07.000000000 -0700
++++ ucarp-1.3/src/ucarp.h	2007-12-19 16:45:33.000000000 -0800
+@@ -214,6 +214,7 @@
+ #define DEFAULT_FACILITY LOG_DAEMON
+ 
+ int docarp(void);
++static int signalFlagEy=0;
+ 
+ #include "globals.h"
+ 
+diff -ru ucarp-1.3.pristine/src/ucarp_p.h ucarp-1.3/src/ucarp_p.h
+--- ucarp-1.3.pristine/src/ucarp_p.h	2007-07-04 06:35:07.000000000 -0700
++++ ucarp-1.3/src/ucarp_p.h	2007-12-19 16:45:33.000000000 -0800
+@@ -1,7 +1,7 @@
+ #ifndef __CARP_P_H__
+ #define __CARP_P_H__ 1
+ 
+-static const char *GETOPT_OPTIONS = "i:s:v:p:Pa:hb:k:m:nu:d:r:zf:B";
++static const char *GETOPT_OPTIONS = "i:s:v:p:Pa:hb:k:x:nu:d:r:zf:B";
+ 
+ static struct option long_options[] = {
+     { "interface", 1, NULL, 'i' },
+@@ -21,7 +21,7 @@
+     { "facility", 1, NULL, 'f' },
+     { "daemonize", 0, NULL, 'B' },
+     { "passfile", 1, NULL, 'o' },
+-    { "xparam", 1, NULL, 'm' },
++    { "xparam", 1, NULL, 'x' },
+     { NULL, 0, NULL, 0 }
+ };
+ 

@@ -1,0 +1,701 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+
+
+<title>
+Hacking TCP/IP with tcpping -- Steve Kehlet's Pages
+</title>
+<link rel="Stylesheet" href="/style.css" type="text/css" media="screen" />
+
+
+
+</head>
+
+<body>
+
+<!-- main layout -->
+<table id="main" border="0" cellspacing="0" cellpadding="0">
+<tr>
+
+<td id="nav">
+<div class="sidebarSheet">
+<div id="siteName"><a href="/">Steve Kehlet's Pages</a></div>
+<br />
+<a href="/docs/about.html">About</a>
+</div><!-- sidebarSheet -->
+
+
+<div class="sidebarSheet">
+<form method="get" action="http://www.google.com/search">
+<input type="hidden" name="sitesearch" value="www.kehlet.cx" />
+<input type="text" name="q" size="16" maxlength="255" />
+<input type="submit" name="btnG" value="Search" />
+</form>
+</div>
+
+
+<div id="articleListSheet">
+<div class="navHeader">Articles:</div>
+<div id="navList">
+<a href="/articles/197.html">02/24/11: It's Been a While</a><br />
+<a href="/articles/196.html">10/29/09: One-Way Notifications to Your ...</a><br />
+<a href="/articles/195.html">07/10/09: I &lt;3 Typography</a><br />
+<a href="/articles/193.html">03/30/09: Kean Coffee Open in Tustin</a><br />
+<a href="/articles/192.html">01/22/09: Here's Your 99 Cents Change...</a><br />
+<a href="/articles/190.html">09/18/08: Ruby GD2 and Gradients</a><br />
+<a href="/articles/189.html">09/17/08: Crashes Happen At the Worst ...</a><br />
+<a href="/articles/188.html">08/28/08: QotD: I think the pressure that...</a><br />
+<a href="/articles/187.html">08/14/08: Hello, JRuby Rack and Glass...</a><br />
+<a href="/articles/186.html">08/08/08: Handy tcpdump Expression to ...</a><br />
+<a href="/articles/185.html">08/07/08: Equal Suffering in JavaScript</a><br />
+<a href="/articles/184.html">07/25/08: Latest DNS Cache Poisoning ...</a><br />
+<a href="/articles/183.html">07/25/08: Handy Mac OS Instant Diction...</a><br />
+<a href="/articles/182.html">07/18/08: My Bloody Valentine are Back</a><br />
+<a href="/articles/178.html">06/17/08: Safari + GreaseKit + Auto B...</a><br />
+<a href="/articles/174.html">06/16/08: Ruby Sequel</a><br />
+<a href="/articles/173.html">04/25/08: JRuby Overview Video</a><br />
+<a href="/articles/171.html">04/24/08: Email Subscribers, Please Si...</a><br />
+<a href="/articles/169.html">02/29/08: I Hate Date Processing</a><br />
+<a href="/articles/168.html">02/27/08: No Pickle</a><br />
+<a href="/articles/166.html">02/07/08: 241 Toll Road Expansion Stop...</a><br />
+<a href="/articles/163.html">02/04/08: Mail Folders Under Inbox, Pa...</a><br />
+<a href="/articles/160.html">12/12/07: Coding Horror</a><br />
+<a href="/articles/159.html">12/10/07: Eliminating Vibrant Popup Ads</a><br />
+<a href="/articles/158.html">11/02/07: Gmail IMAP and Folders Und...</a><br />
+<a href="/articles/157.html">10/26/07: A Thousand (or More!) Words ...</a><br />
+<a href="/articles/156.html">09/27/07: iPhone Still Doesn't Play G.7...</a><br />
+<a href="/articles/155.html">09/26/07: Mac OS X Mail, iPhone, and ...</a><br />
+<a href="/articles/154.html">08/17/07: The Every 55 Minute Cell Ph...</a><br />
+<a href="/articles/151.html">05/29/07: Using Google Apps for Spam...</a><br />
+<a href="/articles/149.html">05/25/07: Fixing DST on my aging Ope...</a><br />
+<a href="/articles/148.html">03/10/07: Annoying &quot;Rapid-Fire&quot; AIM syn...</a><br />
+<a href="/articles/147.html">01/04/07: What the Grinch Got Right</a><br />
+<a href="/articles/146.html">10/05/06: Meeting Martin Diedrich at Ke...</a><br />
+<a href="/articles/145.html">09/20/06: From the entire Diedrich Cof...</a><br />
+<a href="/articles/143.html">04/18/06: Stuck With Your Mistakes For...</a><br />
+<a href="/articles/142.html">04/15/06: Dishwasher Debacle</a><br />
+<a href="/articles/140.html">02/21/06: MacBook Pro is Here!</a><br />
+<a href="/articles/138.html">01/04/06: New Powerbook memory works!</a><br />
+<a href="/articles/136.html">11/01/05: An Outsourced Life</a><br />
+<a href="/articles/135.html">10/28/05: The New &quot;On Call&quot;</a><br />
+<a href="/articles/134.html">09/08/05: iPod nano</a><br />
+<a href="/articles/131.html">07/10/05: A World of Warcraft Moment</a><br />
+<a href="/articles/129.html">06/03/05: Keeping Your SSH Sessions ...</a><br />
+<a href="/articles/127.html">05/18/05: When Bees Attack</a><br />
+<a href="/articles/124.html">05/17/05: San Diego Trip</a><br />
+<a href="/articles/125.html">05/07/05: Garage Wiring Cleanup</a><br />
+<a href="/articles/122.html">03/27/05: Spring Ahead, Fall Flat</a><br />
+<a href="/articles/121.html">03/27/05: Google woes</a><br />
+<a href="/articles/120.html">03/20/05: Knights of the Old Republic II</a><br />
+<a href="/articles/118.html">03/20/05: Eternal Sunshine of the Spotl...</a><br />
+<a href="/articles/119.html">03/13/05: Shred Fest</a><br />
+<a href="/articles/116.html">02/20/05: Web Site Moved (Again)</a><br />
+<a href="/articles/112.html">02/17/05: Tivo on the Home Network</a><br />
+<a href="/articles/113.html">02/12/05: Half Life 2</a><br />
+<a href="/articles/111.html">01/30/05: Home Wiring Project, Part Deux</a><br />
+<a href="/articles/110.html">01/09/05: Supersize Your Tivo</a><br />
+<a href="/articles/109.html">01/09/05: Holiday Food Photo Roundup</a><br />
+<a href="/articles/108.html">01/09/05: The Battle for Middle Earth</a><br />
+<a href="/articles/107.html">01/03/05: CAPTCHA</a><br />
+<a href="/articles/106.html">12/24/04: Parking Lot Rage</a><br />
+<a href="/articles/105.html">12/19/04: The Blither of Earthsea</a><br />
+<a href="/articles/99.html">11/09/04: Tuning TCP for High Bandwi...</a><br />
+<a href="/articles/102.html">10/31/04: San Andreas</a><br />
+<a href="/articles/101.html">10/17/04: The PStwo arrives for Gran...</a><br />
+<a href="/articles/100.html">10/17/04: Look ma!  No PHP!</a><br />
+<a href="/articles/98.html">10/04/04: I, robot.c</a><br />
+<a href="/articles/97.html">09/28/04: Fable</a><br />
+<a href="/articles/96.html">09/26/04: Up 401 days!</a><br />
+<a href="/articles/95.html">09/26/04: Computer Upgrade Nightmare</a><br />
+<a href="/articles/94.html">08/09/04: Beautiful Colorado Country</a><br />
+<a href="/articles/93.html">07/25/04: Windows XP: Insecure By Def...</a><br />
+<a href="/articles/92.html">07/21/04: Mattern Sausage &amp; Meat</a><br />
+<a href="/articles/91.html">07/14/04: Goodbye, D-Link POS-2000 c...</a><br />
+<a href="/articles/90.html">07/11/04: Hello, Objective C</a><br />
+<a href="/articles/89.html">06/27/04: Le Guin's The Farthest Shore</a><br />
+<a href="/articles/88.html">06/20/04: Same Old Stuff, new look and...</a><br />
+<a href="/articles/87.html">06/14/04: Ultima V: Revisiting an Old F...</a><br />
+<a href="/articles/86.html">05/31/04: Home Wiring Project</a><br />
+<a href="/articles/85.html">05/23/04: Goodbye Sendmail, hello Post...</a><br />
+<a href="/articles/84.html">04/25/04: Tivo 1 meets Tivo 2</a><br />
+<a href="/articles/83.html">04/20/04: Dan Brown's The DaVinci Code</a><br />
+<a href="/articles/79.html">03/14/04: Subnetting is Fun</a><br />
+<a href="/articles/81.html">03/06/04: What's up with &quot;The Quick Bro...</a><br />
+<a href="/articles/80.html">03/06/04: Immortalize your handwriting</a><br />
+<a href="/articles/78.html">02/25/04: Web site moved</a><br />
+<a href="/articles/77.html">02/14/04: Hacking TCP/IP with tcpping</a><br />
+<a href="/articles/76.html">02/07/04: Stopping image leechers</a><br />
+<a href="/articles/70.html">02/07/04: Morrowind Modding</a><br />
+<a href="/articles/68.html">01/28/04: Infrastructure Guy</a><br />
+<a href="/articles/67.html">01/28/04: Brand new year and ...</a><br />
+<a href="/articles/66.html">11/28/03: Dan Brown's Angels and Dem...</a><br />
+<a href="/articles/65.html">11/28/03: Thanksgiving 2003</a><br />
+<a href="/articles/64.html">11/08/03: Knights of the Old Republic</a><br />
+<a href="/articles/63.html">11/08/03: 10 years of Linux</a><br />
+<a href="/articles/55.html">11/06/03: Morrowind: The (Immersive) Q...</a><br />
+<a href="/articles/61.html">09/01/03: Trip to Berkeley</a><br />
+<a href="/articles/60.html">08/25/03: Goodbye UW-imapd, hello Maild...</a><br />
+<a href="/articles/59.html">08/17/03: Massive Cox Outage</a><br />
+<a href="/articles/54.html">07/03/03: The Latest Move in Cox's Ar...</a><br />
+<a href="/articles/53.html">05/01/03: Reading Binge, Part II: Rende...</a><br />
+<a href="/articles/51.html">04/28/03: Reading Binge, Part I: A Wiza...</a><br />
+<a href="/articles/52.html">04/20/03: Fun with Tengwar</a><br />
+<a href="/articles/50.html">04/19/03: Crown moulding project</a><br />
+<a href="/articles/49.html">04/19/03: One year of Macintosh and M...</a><br />
+<a href="/articles/46.html">04/18/03: My new site</a><br />
+<a href="/articles/45.html">04/09/03: Weblog development</a><br />
+<a href="/articles/19.html">04/09/03: Dual 1Ghz Ultra Sparc III, 2...</a><br />
+<a href="/articles/15.html">02/15/03: Guest Room Painted</a><br />
+<a href="/articles/14.html">02/15/03: FTC's national &quot;do not call&quot; re...</a><br />
+<a href="/articles/13.html">02/15/03: Unix: Quick and easy to install...</a><br />
+<a href="/articles/8.html">02/15/03: The Collapse of Inconvenience</a><br />
+<a href="/articles/4.html">02/11/03: Primer Goodness</a><br />
+<a href="/articles/7.html">01/18/03: Chicken Dinner</a><br />
+<a href="/articles/16.html">01/16/03: Water heater disaster</a><br />
+</div> <!-- navList -->
+</div> <!-- articleListSheet -->
+
+
+
+<div id="finePrint">
+Steve Kehlet's Pages <br />
+Copyright (c) 2003-2014 Steven Kehlet
+</div>
+
+
+</td> <!-- nav -->
+
+<td valign="top"> <!-- content -->
+
+<br />
+
+
+<div class="newerOlderLinks">
+<a href="/articles/78.html">&lt;- 02/25/04: Web site moved</a>
+ &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 
+<a href="/articles/76.html">02/07/04: Stopping image leechers -&gt;</a>
+</div> <!-- newerOlderLinks -->
+<div id="sheet">
+
+<div id="articleHeading">
+Hacking TCP/IP with tcpping
+</div>
+
+<div id="articleSubtitle">
+Sat Feb 14th 2004, 11:18pm
+
+</div> <!-- articleSubtitle -->
+<div id="articleBody">
+<div style="border: 1px solid; padding: 10px">
+<b><i>Update March 1, 2010</i></b>: Jim Wyllie is hosting future development of tcpping
+at: <a href="http://github.com/jwyllie83/tcpping">http://github.com/jwyllie83/tcpping</a>,
+please go there for an updated version and for any new bug fixes and development.  Thanks
+Jim!
+</div>
+<br />
+
+tcpping is a tool I wrote to determine network latency between two points despite ICMP
+filtering.  The idea is pretty much just like normal ping, but instead of using ICMP, it
+sends TCP SYN packets to the target and times how long it takes to receive the subsequent
+SYN/ACKs or RSTs.
+
+<br><br>
+
+It all started when I was shopping around various web hosting providers.  Among other
+criteria, I was trying to find one that didn't have too high of latency from my machines
+here at home so working on them wouldn't be a complete lag fest.  But a number of the
+providers have ICMP filtered so you can't ping their web sites, and can't tell what the
+latency is like.
+
+<br><br>
+
+The tool uses <a href="http://www.packetfactory.net/Projects/Libnet/">libnet</a> to create
+and send off a fabricated SYN packet to the taget, and <a
+href="http://www.tcpdump.org/">libpcap</a> to sniff for the return traffic.  If the port
+you choose (default 80) on the target server has a service listening, the target sends
+back a SYN/ACK packet.  Your local operating system gets this packet, doesn't know what to
+do with it, and subsequently sends the target a RST packet.  This is actually quite nice
+since it cleans everything up so we can't be accused of creating tons of half-open TCP
+connections.  If you choose a port on the target that doesn't have a service listening
+(and isn't filtered), the target sends back a RST packet.  Your local OS just drops
+these.
+
+<br><br>
+
+<strike><b>You can download it <a href="/download/tcpping-0.3.tar.gz">here</a></b>.  It's
+free software under the new BSD license, anyone is welcome to download it, study it,
+modify it, and/or redistribute it in either a proprietary or free fashion.  I've tested it
+on Mac OS X and Linux.  You must be root to run it since it uses raw sockets.  <i>Update
+Nov 3, 2008: thanks to Jim Wyllie for a patch to specify the timeout (-W &lt;timeout&gt;),
+move the root check to after the options check, and to compile cleanly on gcc4.  Thanks
+Jim!</i></strike>  <a href="http://github.com/jwyllie83/tcpping">Please find tcpping at
+its new home here at Github, now maintained by Jim Wyllie</a>.  
+
+<br><br>
+
+Here is some example output, by default pinging port 80 (where my web server is running):
+
+<pre>
+[6:22pm] luthien:~/proj/tcpping-% sudo ./tcpping sumatra
+TCP PING sumatra.internal.kehlet.cx (10.16.74.2:80) on en1
+SYN/ACK from 10.16.74.2: seq=1 ttl=64 time=1.047ms
+SYN/ACK from 10.16.74.2: seq=2 ttl=64 time=0.965ms
+SYN/ACK from 10.16.74.2: seq=3 ttl=64 time=1.081ms
+SYN/ACK from 10.16.74.2: seq=4 ttl=64 time=1.245ms
+^C
+--- sumatra.internal.kehlet.cx TCP ping statistics ---
+4 SYN packets transmitted, 4 SYN/ACKs and 0 RSTs received, 0.0% packet loss
+round-trip min/avg/max = 0.965/1.084/1.245 ms
+</pre>
+
+Here's the tool in action against port 92, which sends back RSTs (no service is running on
+that port):
+
+<pre>
+[6:22pm] luthien:~/proj/tcpping-% sudo ./tcpping -p 92 sumatra
+TCP PING sumatra.internal.kehlet.cx (10.16.74.2:92) on en1
+RST from 10.16.74.2: seq=1 ttl=64 time=0.862ms
+RST from 10.16.74.2: seq=2 ttl=64 time=1.040ms
+RST from 10.16.74.2: seq=3 ttl=64 time=1.019ms
+RST from 10.16.74.2: seq=4 ttl=64 time=1.044ms
+^C
+--- sumatra.internal.kehlet.cx TCP ping statistics ---
+4 SYN packets transmitted, 0 SYN/ACKs and 4 RSTs received, 0.0% packet loss
+round-trip min/avg/max = 0.862/0.991/1.044 ms
+</pre>
+
+With verbose mode (-v), the tools will show you the actual packets.  Here's a site that's
+filtering ICMP pings, but we can get around that with tcpping:
+
+<pre>
+[11:08pm] luthien:~/proj/tcpping-% sudo ./tcpping -v www.apollohosting.com
+TCP PING www.apollohosting.com (208.56.13.233:80) on en1
+1076828929.146519 10.16.74.8:8674 -> 208.56.13.233:80 [S]
+1076828929.238506 208.56.13.233:80 -> 10.16.74.8:8674 [SA]
+SYN/ACK from 208.56.13.233: seq=1 ttl=48 time=90.847ms
+1076828929.240317 10.16.74.8:8674 -> 208.56.13.233:80 [R]
+1076828930.241348 10.16.74.8:61062 -> 208.56.13.233:80 [S]
+1076828930.326531 208.56.13.233:80 -> 10.16.74.8:61062 [SA]
+SYN/ACK from 208.56.13.233: seq=2 ttl=48 time=85.162ms
+1076828930.328364 10.16.74.8:61062 -> 208.56.13.233:80 [R]
+1076828931.329304 10.16.74.8:17802 -> 208.56.13.233:80 [S]
+1076828931.412466 208.56.13.233:80 -> 10.16.74.8:17802 [SA]
+SYN/ACK from 208.56.13.233: seq=3 ttl=48 time=83.164ms
+1076828931.414274 10.16.74.8:17802 -> 208.56.13.233:80 [R]
+1076828932.415249 10.16.74.8:60598 -> 208.56.13.233:80 [S]
+1076828932.496567 208.56.13.233:80 -> 10.16.74.8:60598 [SA]
+SYN/ACK from 208.56.13.233: seq=4 ttl=48 time=81.255ms
+1076828932.498290 10.16.74.8:60598 -> 208.56.13.233:80 [R]
+^C
+--- www.apollohosting.com TCP ping statistics ---
+4 SYN packets transmitted, 4 SYN/ACKs and 0 RSTs received, 0.0% packet loss
+round-trip min/avg/max = 1.000/85.107/90.847 ms
+</pre>
+
+You can see from above the behavior I described: we send a fake SYN packet, the target
+sends back a SYN/ACK (at which point the tool prints out the timing information).  Just
+after that the local OS sends a RST to the target.
+
+<br><br>
+
+It's been fun to write.  If you find it useful, please let me know.
+</div>
+</div> <!-- sheet -->
+
+<br /><br /><br />
+<div id="postingsSheet">
+<div class="postingHeader">
+Visitor comments
+</div>
+<div class="posting">
+<div class="postingHeading">
+On Sun Feb 15th 2004, 6:52pm, Steve Kehlet posted:
+</div>
+<div class="postingBody">
+Turns out <a href="http://www.hping.org/">hping</a> has TCP ping
+functionality and more.  I'd recommend checking it out, it has a lot of
+really cool features.  I downloaded the version out of CVS and had it up
+and running on my Mac OS X laptop in minutes.
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Wed Feb 18th 2004, 11:33am, eburrows posted:
+</div>
+<div class="postingBody">
+Even if there is another utility out there to do the same, or similar
+things, I think it's absolutely awsome that you wrote this. A really nifty
+and useful tool, with some complex logic and understanding beind it. Just
+awesome Steve.
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Sat Jul 24th 2004, 10:22pm, Guest posted:
+</div>
+<div class="postingBody">
+Hi i dont; know how to use this comment "tcpping" , need install or change
+to other format ?
+
+Could you describe how to install and perform it .Thanks for your help
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Sun Jul 25th 2004, 4:05pm, Steve Kehlet posted:
+</div>
+<div class="postingBody">
+Feel free to email me directly if you have any installation questions,
+steven at kehlet dot cx.  I would, however, point out this was more of an
+experiment than a production-quality piece of software :-).  Also, it will
+likely only run on a Unix variant: Linux, *BSD, Mac OS X, etc.  Try hping
+for a very powerful, fully featured tcp ping client.
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Sun Jan 16th 2005, 11:55am, Clay posted:
+</div>
+<div class="postingBody">
+I just saw this yesterday and it reminded me of this thread.  A neat way to
+troubleshoot networks, especially since network operators blocking all ICMP
+types and codes seems to be growing in popularity.
+
+Layer Four Traceroute:
+
+http://oppleman.com/lft/
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Mon Jan 17th 2005, 6:07pm, Steve Kehlet posted:
+</div>
+<div class="postingBody">
+Pretty cool stuff, I'm trying some traces through my company's firewall
+right now.  I see hping also has a similar TCP-based traceroute feature. 
+Definitely some handy tools to have!  
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Fri Mar 17th 2006, 1:40pm, gareth posted:
+</div>
+<div class="postingBody">
+great tool, have used it for the exact same reason it was developed.
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Sat Mar 15th 2008, 4:48am, Visitor posted:
+</div>
+<div class="postingBody">
+plz hack i got a people she ip 192.168.1.10 pzl hack him i want hack him to
+but i cant<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Sat Mar 15th 2008, 3:32pm, Clay posted:
+</div>
+<div class="postingBody">
+wtf thats my ip plz no hax me<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Fri Jun 20th 2008, 5:34am, Visitor posted:
+</div>
+<div class="postingBody">
+hay dont hack 192.168.1.10.<br />
+its on my network<br />
+my boss will kill me<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Sat Jul 26th 2008, 1:25pm, Visitor posted:
+</div>
+<div class="postingBody">
+Haha, wow, you people are fucking retards, 192.168.1.whatever is on just
+about everyone's network!<br />
+<br />
+They are different computers INSIDE your own network, you can only access
+that IP if you are IN that network.<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Sun Aug 17th 2008, 1:57pm, Jack Ryan posted:
+</div>
+<div class="postingBody">
+-rotfl- Sounds like a 15 year old doesn't know what an internal ip address
+is.<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Thu Aug 21st 2008, 5:22am, Visitor posted:
+</div>
+<div class="postingBody">
+Reply:<br />
+On Fri Jun 20th 2008, 5:34am, Visitor posted:<br />
+hay dont hack 192.168.1.10.<br />
+its on my network<br />
+my boss will kill me<br />
+<br />
+ahahahahahahahahahahahahahhahaahhahahaah thats preety cool hahahahahahha
+:D:D:D:D<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Thu Aug 21st 2008, 10:36am, Steve Kehlet posted:
+</div>
+<div class="postingBody">
+Enough with the 192.168.1.x jokes guys...  :-)  If you want a funny story
+about turning a would-be-hacker loose on his own system, read
+http://www.electric-escape.net/node/1475<br />
+<br />
+<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Thu Nov 13th 2008, 5:45pm, hk posted:
+</div>
+<div class="postingBody">
+Ironic you release it under a BSD license but doesn't work on FreeBSD.<br
+/>
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Thu Nov 13th 2008, 6:00pm, Steve Kehlet posted:
+</div>
+<div class="postingBody">
+Have you tried it on FreeBSD and it didn't work?  Patches/bug reports
+welcome.<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Mon Mar 23rd 2009, 8:13am, pat posted:
+</div>
+<div class="postingBody">
+Thank you for publishing this code.  Will use it on my multipath solution
+:)).  Thanx again<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Mon Apr 6th 2009, 10:22am, Igor posted:
+</div>
+<div class="postingBody">
+Thanks for the utility! It failed to work at multihome host, so I had to
+patch a little (insert deviceName into libnet_init call).<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Sat Sep 26th 2009, 1:15pm, bitmith posted:
+</div>
+<div class="postingBody">
+Hi Steve, this is very nice tool which I used to use before, but I found
+that you could achieve the same TCP connect (SYN/ACK) test with nmap -sS -p
+T:&lt;ports&gt;<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Fri Jan 29th 2010, 6:02am, Jim Wyllie posted:
+</div>
+<div class="postingBody">
+Hey Steve, I'm getting a segfault on my Linux router when running this guy.
+It's a newer install of Ubuntu (and presumably an updated libnet) so that
+might be it... but I'm not convinced of that yet. I'll get to some
+debugging hopefully this weekend and send some patches.<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Fri Jan 29th 2010, 6:04am, Jim Wyllie posted:
+</div>
+<div class="postingBody">
+Oh, and one other thing... there's a race condition with the program
+terminating via Ctrl+C and the child printing the summary results. Doesn't
+do anything too bad, but it will present the prompt and then write the
+results. Kind of annoying. Patch coming for that too when I fix the other
+bug :)<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Wed Mar 10th 2010, 7:54pm, dragonbalz posted:
+</div>
+<div class="postingBody">
+001011<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Wed Nov 16th 2011, 4:42pm, Nils posted:
+</div>
+<div class="postingBody">
+ddossing 127.0.0.1<br />
+ALLMOST GOT THE FUCKER DOWN!<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Sat Nov 10th 2012, 7:39am, preetam posted:
+</div>
+<div class="postingBody">
+fuck off..!! <br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Sat Nov 10th 2012, 7:44am, preetam posted:
+</div>
+<div class="postingBody">
+fuck off..!! <br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Mon Nov 18th 2013, 1:25pm, Ramukaka posted:
+</div>
+<div class="postingBody">
+Awesome tool<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+</div> <!-- postingsSheet -->
+<br />
+<br />
+<div class="newerOlderLinks">
+<a href="/articles/78.html">&lt;- 02/25/04: Web site moved</a>
+ &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 
+<a href="/articles/76.html">02/07/04: Stopping image leechers -&gt;</a>
+</div> <!-- newerOlderLinks -->
+
+
+</td> <!-- content -->
+
+</tr>
+</table> <!-- main layout -->
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3386315-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+
+</body>
+</html>
+
+<!-- Generated on 2014/09/07 11:29am -->

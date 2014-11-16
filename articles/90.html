@@ -1,0 +1,720 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+
+
+<title>
+Hello, Objective C -- Steve Kehlet's Pages
+</title>
+<link rel="Stylesheet" href="/style.css" type="text/css" media="screen" />
+
+
+
+</head>
+
+<body>
+
+<!-- main layout -->
+<table id="main" border="0" cellspacing="0" cellpadding="0">
+<tr>
+
+<td id="nav">
+<div class="sidebarSheet">
+<div id="siteName"><a href="/">Steve Kehlet's Pages</a></div>
+<br />
+<a href="/docs/about.html">About</a>
+</div><!-- sidebarSheet -->
+
+
+<div class="sidebarSheet">
+<form method="get" action="http://www.google.com/search">
+<input type="hidden" name="sitesearch" value="www.kehlet.cx" />
+<input type="text" name="q" size="16" maxlength="255" />
+<input type="submit" name="btnG" value="Search" />
+</form>
+</div>
+
+
+<div id="articleListSheet">
+<div class="navHeader">Articles:</div>
+<div id="navList">
+<a href="/articles/197.html">02/24/11: It's Been a While</a><br />
+<a href="/articles/196.html">10/29/09: One-Way Notifications to Your ...</a><br />
+<a href="/articles/195.html">07/10/09: I &lt;3 Typography</a><br />
+<a href="/articles/193.html">03/30/09: Kean Coffee Open in Tustin</a><br />
+<a href="/articles/192.html">01/22/09: Here's Your 99 Cents Change...</a><br />
+<a href="/articles/190.html">09/18/08: Ruby GD2 and Gradients</a><br />
+<a href="/articles/189.html">09/17/08: Crashes Happen At the Worst ...</a><br />
+<a href="/articles/188.html">08/28/08: QotD: I think the pressure that...</a><br />
+<a href="/articles/187.html">08/14/08: Hello, JRuby Rack and Glass...</a><br />
+<a href="/articles/186.html">08/08/08: Handy tcpdump Expression to ...</a><br />
+<a href="/articles/185.html">08/07/08: Equal Suffering in JavaScript</a><br />
+<a href="/articles/184.html">07/25/08: Latest DNS Cache Poisoning ...</a><br />
+<a href="/articles/183.html">07/25/08: Handy Mac OS Instant Diction...</a><br />
+<a href="/articles/182.html">07/18/08: My Bloody Valentine are Back</a><br />
+<a href="/articles/178.html">06/17/08: Safari + GreaseKit + Auto B...</a><br />
+<a href="/articles/174.html">06/16/08: Ruby Sequel</a><br />
+<a href="/articles/173.html">04/25/08: JRuby Overview Video</a><br />
+<a href="/articles/171.html">04/24/08: Email Subscribers, Please Si...</a><br />
+<a href="/articles/169.html">02/29/08: I Hate Date Processing</a><br />
+<a href="/articles/168.html">02/27/08: No Pickle</a><br />
+<a href="/articles/166.html">02/07/08: 241 Toll Road Expansion Stop...</a><br />
+<a href="/articles/163.html">02/04/08: Mail Folders Under Inbox, Pa...</a><br />
+<a href="/articles/160.html">12/12/07: Coding Horror</a><br />
+<a href="/articles/159.html">12/10/07: Eliminating Vibrant Popup Ads</a><br />
+<a href="/articles/158.html">11/02/07: Gmail IMAP and Folders Und...</a><br />
+<a href="/articles/157.html">10/26/07: A Thousand (or More!) Words ...</a><br />
+<a href="/articles/156.html">09/27/07: iPhone Still Doesn't Play G.7...</a><br />
+<a href="/articles/155.html">09/26/07: Mac OS X Mail, iPhone, and ...</a><br />
+<a href="/articles/154.html">08/17/07: The Every 55 Minute Cell Ph...</a><br />
+<a href="/articles/151.html">05/29/07: Using Google Apps for Spam...</a><br />
+<a href="/articles/149.html">05/25/07: Fixing DST on my aging Ope...</a><br />
+<a href="/articles/148.html">03/10/07: Annoying &quot;Rapid-Fire&quot; AIM syn...</a><br />
+<a href="/articles/147.html">01/04/07: What the Grinch Got Right</a><br />
+<a href="/articles/146.html">10/05/06: Meeting Martin Diedrich at Ke...</a><br />
+<a href="/articles/145.html">09/20/06: From the entire Diedrich Cof...</a><br />
+<a href="/articles/143.html">04/18/06: Stuck With Your Mistakes For...</a><br />
+<a href="/articles/142.html">04/15/06: Dishwasher Debacle</a><br />
+<a href="/articles/140.html">02/21/06: MacBook Pro is Here!</a><br />
+<a href="/articles/138.html">01/04/06: New Powerbook memory works!</a><br />
+<a href="/articles/136.html">11/01/05: An Outsourced Life</a><br />
+<a href="/articles/135.html">10/28/05: The New &quot;On Call&quot;</a><br />
+<a href="/articles/134.html">09/08/05: iPod nano</a><br />
+<a href="/articles/131.html">07/10/05: A World of Warcraft Moment</a><br />
+<a href="/articles/129.html">06/03/05: Keeping Your SSH Sessions ...</a><br />
+<a href="/articles/127.html">05/18/05: When Bees Attack</a><br />
+<a href="/articles/124.html">05/17/05: San Diego Trip</a><br />
+<a href="/articles/125.html">05/07/05: Garage Wiring Cleanup</a><br />
+<a href="/articles/122.html">03/27/05: Spring Ahead, Fall Flat</a><br />
+<a href="/articles/121.html">03/27/05: Google woes</a><br />
+<a href="/articles/120.html">03/20/05: Knights of the Old Republic II</a><br />
+<a href="/articles/118.html">03/20/05: Eternal Sunshine of the Spotl...</a><br />
+<a href="/articles/119.html">03/13/05: Shred Fest</a><br />
+<a href="/articles/116.html">02/20/05: Web Site Moved (Again)</a><br />
+<a href="/articles/112.html">02/17/05: Tivo on the Home Network</a><br />
+<a href="/articles/113.html">02/12/05: Half Life 2</a><br />
+<a href="/articles/111.html">01/30/05: Home Wiring Project, Part Deux</a><br />
+<a href="/articles/110.html">01/09/05: Supersize Your Tivo</a><br />
+<a href="/articles/109.html">01/09/05: Holiday Food Photo Roundup</a><br />
+<a href="/articles/108.html">01/09/05: The Battle for Middle Earth</a><br />
+<a href="/articles/107.html">01/03/05: CAPTCHA</a><br />
+<a href="/articles/106.html">12/24/04: Parking Lot Rage</a><br />
+<a href="/articles/105.html">12/19/04: The Blither of Earthsea</a><br />
+<a href="/articles/99.html">11/09/04: Tuning TCP for High Bandwi...</a><br />
+<a href="/articles/102.html">10/31/04: San Andreas</a><br />
+<a href="/articles/101.html">10/17/04: The PStwo arrives for Gran...</a><br />
+<a href="/articles/100.html">10/17/04: Look ma!  No PHP!</a><br />
+<a href="/articles/98.html">10/04/04: I, robot.c</a><br />
+<a href="/articles/97.html">09/28/04: Fable</a><br />
+<a href="/articles/96.html">09/26/04: Up 401 days!</a><br />
+<a href="/articles/95.html">09/26/04: Computer Upgrade Nightmare</a><br />
+<a href="/articles/94.html">08/09/04: Beautiful Colorado Country</a><br />
+<a href="/articles/93.html">07/25/04: Windows XP: Insecure By Def...</a><br />
+<a href="/articles/92.html">07/21/04: Mattern Sausage &amp; Meat</a><br />
+<a href="/articles/91.html">07/14/04: Goodbye, D-Link POS-2000 c...</a><br />
+<a href="/articles/90.html">07/11/04: Hello, Objective C</a><br />
+<a href="/articles/89.html">06/27/04: Le Guin's The Farthest Shore</a><br />
+<a href="/articles/88.html">06/20/04: Same Old Stuff, new look and...</a><br />
+<a href="/articles/87.html">06/14/04: Ultima V: Revisiting an Old F...</a><br />
+<a href="/articles/86.html">05/31/04: Home Wiring Project</a><br />
+<a href="/articles/85.html">05/23/04: Goodbye Sendmail, hello Post...</a><br />
+<a href="/articles/84.html">04/25/04: Tivo 1 meets Tivo 2</a><br />
+<a href="/articles/83.html">04/20/04: Dan Brown's The DaVinci Code</a><br />
+<a href="/articles/79.html">03/14/04: Subnetting is Fun</a><br />
+<a href="/articles/81.html">03/06/04: What's up with &quot;The Quick Bro...</a><br />
+<a href="/articles/80.html">03/06/04: Immortalize your handwriting</a><br />
+<a href="/articles/78.html">02/25/04: Web site moved</a><br />
+<a href="/articles/77.html">02/14/04: Hacking TCP/IP with tcpping</a><br />
+<a href="/articles/76.html">02/07/04: Stopping image leechers</a><br />
+<a href="/articles/70.html">02/07/04: Morrowind Modding</a><br />
+<a href="/articles/68.html">01/28/04: Infrastructure Guy</a><br />
+<a href="/articles/67.html">01/28/04: Brand new year and ...</a><br />
+<a href="/articles/66.html">11/28/03: Dan Brown's Angels and Dem...</a><br />
+<a href="/articles/65.html">11/28/03: Thanksgiving 2003</a><br />
+<a href="/articles/64.html">11/08/03: Knights of the Old Republic</a><br />
+<a href="/articles/63.html">11/08/03: 10 years of Linux</a><br />
+<a href="/articles/55.html">11/06/03: Morrowind: The (Immersive) Q...</a><br />
+<a href="/articles/61.html">09/01/03: Trip to Berkeley</a><br />
+<a href="/articles/60.html">08/25/03: Goodbye UW-imapd, hello Maild...</a><br />
+<a href="/articles/59.html">08/17/03: Massive Cox Outage</a><br />
+<a href="/articles/54.html">07/03/03: The Latest Move in Cox's Ar...</a><br />
+<a href="/articles/53.html">05/01/03: Reading Binge, Part II: Rende...</a><br />
+<a href="/articles/51.html">04/28/03: Reading Binge, Part I: A Wiza...</a><br />
+<a href="/articles/52.html">04/20/03: Fun with Tengwar</a><br />
+<a href="/articles/50.html">04/19/03: Crown moulding project</a><br />
+<a href="/articles/49.html">04/19/03: One year of Macintosh and M...</a><br />
+<a href="/articles/46.html">04/18/03: My new site</a><br />
+<a href="/articles/45.html">04/09/03: Weblog development</a><br />
+<a href="/articles/19.html">04/09/03: Dual 1Ghz Ultra Sparc III, 2...</a><br />
+<a href="/articles/15.html">02/15/03: Guest Room Painted</a><br />
+<a href="/articles/14.html">02/15/03: FTC's national &quot;do not call&quot; re...</a><br />
+<a href="/articles/13.html">02/15/03: Unix: Quick and easy to install...</a><br />
+<a href="/articles/8.html">02/15/03: The Collapse of Inconvenience</a><br />
+<a href="/articles/4.html">02/11/03: Primer Goodness</a><br />
+<a href="/articles/7.html">01/18/03: Chicken Dinner</a><br />
+<a href="/articles/16.html">01/16/03: Water heater disaster</a><br />
+</div> <!-- navList -->
+</div> <!-- articleListSheet -->
+
+
+
+<div id="finePrint">
+Steve Kehlet's Pages <br />
+Copyright (c) 2003-2014 Steven Kehlet
+</div>
+
+
+</td> <!-- nav -->
+
+<td valign="top"> <!-- content -->
+
+<br />
+
+
+<div class="newerOlderLinks">
+<a href="/articles/91.html">&lt;- 07/14/04: Goodbye, D-Link POS-2000 c...</a>
+ &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 
+<a href="/articles/89.html">06/27/04: Le Guin's The Farthest Shore -&gt;</a>
+</div> <!-- newerOlderLinks -->
+<div id="sheet">
+
+<div id="articleHeading">
+Hello, Objective C
+</div>
+
+<div id="articleSubtitle">
+Sun Jul 11th 2004, 10:23pm
+
+</div> <!-- articleSubtitle -->
+<div id="articleBody">
+I wanted to learn about Cocoa programming, so I picked up <a
+href="http://www.amazon.com/exec/obidos/tg/detail/-/0321213149/qid=1089596131/sr=8-1/ref=pd_ka_1/002-6284010-3874455?v=glance&s=books&n=507846">Cocoa
+Programming for Mac OS X</a> (second edition), by Aaron Hillegass.  I think I read about
+it on Slashdot a long time ago, and had it on my wish list for a while.  The book is
+pretty good so far, though I've really only just gotten started, so I thought I'd write
+something up on my initial impressions of Objective C.
+
+<br><br>
+
+Among other crazy things, Cocoa programming is mostly done in Objective C, which is a
+lightweight extension of C that makes it a loosely typed, object-oriented language.  That,
+combined with a powerful set of NeXTStep support libraries, makes it almost feel like a
+higher-level scripting language.  Hillegass devotes about 40 pages to a crash course in
+ObjC, aimed at intermediate or better programmers who've done the whole OO thing already
+in some other language (e.g. Java, C++).  I have a few nits about it, but granted the book
+isn't about ObjC, it's about Cocoa, and eventually most of my burning questions during the
+chapter were answered, if not as early as they could have been.  
+
+<br><br>
+
+It seems to me if you've done Java, then the concepts of classes, interfaces, instance
+variables, and static and instance methods translate over directly.  That and if you've
+done C in the past, then you're pretty much set as far as pointers, addresses, etc. go. 
+The only really screwy thing with it is its approach to memory management: the programmer
+manages reference counts, you call <i>retain</i> and <i>release</i> methods on objects,
+and to top it off some objects are <i>autorelease</i>d for you.  Seems very powerful, if
+you can get your head around it.  <i>[Update May 1st, 2008: ObjC has <a
+href="http://developer.apple.com/leopard/overview/objectivec2.html">garbage collection</a>
+now].</i>  Oh... and one more thing, the syntactical screwiness.  The whole language looks
+really nutty; the author mentions that it was originally implemented as a C preprocessor,
+which totally makes sense when you look at it--funny '@', '-', and '[]' symbols
+everywhere, and other things which are (were?) clearly macros.  This isn't C anymore.
+
+<br><br>
+
+So I thought I'd share my HelloWorld program.  How exciting.  Pretty much the typical
+"Hello, world", if not quite as ultra trivial, with a simple HelloWorld class that I think
+demonstrates some of the syntactical and memory management nuttiness involved here.
+
+<br><br>
+
+First the class declaration, HelloWorld.h:
+
+<pre>
+#import &lt;Foundation/Foundation.h&gt;
+
+@interface HelloWorld : NSObject {
+    // no instance variables
+}
+
+// methods
+- (void)sayHello;
+
+@end
+</pre>
+
+Read that @interface line like "Class HelloWorld inherits from NSObject".  Instance
+variables go inside the curly brackets, methods underneath.  The bizarre leading '-'
+indicates sayHello() is an instance, not a static ('+'), method.  Then the implementation,
+HelloWorld.m:
+
+<pre>
+#import "HelloWorld.h"
+
+@implementation HelloWorld
+
+- (void)sayHello
+{
+    NSLog(@"Hello, world, at %@", [NSCalendarDate calendarDate]);
+}
+
+@end
+</pre>
+
+We're using stuff from the NeXTStep libraries here, NSLog is like a printf() (printf()
+would have worked fine, but Hillegass is teaching us the NS stuff).  %@ is cool, it calls
+the object's description() method and substitutes the results (i.e. toString()).  More on
+the square bracket stuff next.  Then the main program to drive it, main.m:
+
+<pre>
+#import &lt;Foundation/Foundation.h&gt;
+#import "HelloWorld.h"
+
+int main (int argc, const char * argv[]) {
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+
+    // my stuff
+    HelloWorld *hw = [[HelloWorld alloc] init];
+    [hw autorelease];
+	
+    [hw sayHello];
+	    
+    [pool release];
+    return 0;
+}
+</pre>
+
+Java guys, read the "[HelloWorld alloc]" syntax as HelloWorld.alloc(), or actually as new
+HelloWorld().  Note alloc() is a static method in this case.  <i>[Added May 1st, 2008: As
+Aaron (Hillegass?) points out in the comments below, it's important to call init() on the
+object in addition to alloc() so proper initialization happens, instead of simply
+allocating the memory for it.  It's surprising my program didn't crash.]</i>  [hw
+sayHello] calls the sayHello() method.  
+
+<br><br>
+
+So here's my take on the memory management bit.  ObjC has no garbage collection, so we're
+back to the days of fooling around with this stuff (argh, haven't we learned anything? 
+Anyways...)  Objects maintain a reference count which the developer can manipulate by
+calling the retain() or release() methods.  Objects destroy themselves when their
+reference count hits zero.  This way shared objects exist for as long as they need to
+exist, and go away when no one wants them anymore.  Slick.  When you alloc() an object,
+it's reference count is set to 1.  At the end of main() I could have called [hw release]
+to destroy it, or in this case, I chose to take advantage of the NSAutoreleasePool
+convention, which is this collection bin for holding objects to be released later, at a
+time of the programmer's choosing--specifically, you can see at the end of the main()
+method ([pool release]).  
+By calling [hw autorelease], the hw object told whatever pool object in scope to reference
+it (incrementing its ref count), then decremented its reference count (well, I'm sure
+internally they optimize this to not do anything, since it's a wash, but that's the idea).
+ This way my memory management (creation/deletion) is handled all in one spot--I've
+created it, and I've effectively freed it, but should someone else want it before I'm done
+with this method they can have it.  This "delayed destruction" approach seems pretty
+clever, and has a more few more practical applications which are not really demonstrated
+by my simple Hello World program.
+
+<br><br>
+
+(Update Mar 3 and 20th, 2009): To compile and run all this, use a Terminal and gcc (thanks
+Mina and Ade!):
+
+<pre>
+$ gcc main.m HelloWorld.m -framework Foundation -o hello 
+$ ./hello
+2009-03-20 11:39:06.444 hello[78751:10b] Hello, world, at 2009-03-20 11:39:06 -0700
+</pre>
+
+<br>
+
+At the top of the article I said "Cocoa programming is <i>mostly</i> done in Objective C"
+deliberately to bring up that Apple actually provides all the Cocoa/NeXTStep APIs in Java,
+so if you wanted, you could write (very non-portable) Java code to create Cocoa apps.  It
+seems to me it must be a lot of work to keep both languages up to date with any API
+changes.  (Update Mar 3 2009: and indeed, this "Java bridge" API is <a
+href="http://en.wikipedia.org/wiki/Cocoa_(API)#Implementations">deprecated as of Mac OS
+10.4</a>, so never mind).  However, while this may seem exciting to the ObjC-adverse,
+Hillegass points out that "almost no one is developing Cocoa apps in Java", mainly citing
+performance, but also pointing out potential bugginess and how Java just isn't the right
+tool for the job.  Too bad!  (Update Mar 3, 2009: five years later and my how my
+perspectives have changed--I'd pick ObjC in a heartbeat over Java).
+</div>
+</div> <!-- sheet -->
+
+<br /><br /><br />
+<div id="postingsSheet">
+<div class="postingHeader">
+Visitor comments
+</div>
+<div class="posting">
+<div class="postingHeading">
+On Wed Oct 26th 2005, 7:46am, Visitor posted:
+</div>
+<div class="postingBody">
+Hey, thanks. That was the best short objective-c introduction I've found so
+far :-)
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Sun Mar 4th 2007, 1:55pm, Visitor posted:
+</div>
+<div class="postingBody">
+Holy shit, C++ SEEMS pretty more easy so far.
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Tue Mar 4th 2008, 11:17am, KeNJlRo posted:
+</div>
+<div class="postingBody">
+I've just started learning Objective C.<br />
+<br />
+Thank for explanation and your code.<br />
+<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Fri Mar 7th 2008, 12:09pm, kronos posted:
+</div>
+<div class="postingBody">
+thanks for your explanation, it cleared up a lot of things for me.<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Fri Mar 7th 2008, 1:06pm, Steve Kehlet posted:
+</div>
+<div class="postingBody">
+You're welcome KeNJlRo and kronos!  I wonder if this page got linked
+somewhere.<br />
+<br />
+I would add that I heard Objective-C 2.0 (i.e. Leopard+) has garbage
+collection.  Hooray. 
+http://developer.apple.com/leopard/overview/objectivec2.html<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Thu Mar 20th 2008, 9:36pm, Visitor posted:
+</div>
+<div class="postingBody">
+Great article! ...but OMG! Objective-C... it's like C and C++ had a
+retarded child that was raised by make.<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Sat Apr 19th 2008, 8:25pm, Visitor posted:
+</div>
+<div class="postingBody">
+That is insanely complicated way to display Hello World. It has effectively
+scared me away from Obj C.<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Mon Apr 21st 2008, 11:40am, Steve Kehlet posted:
+</div>
+<div class="postingBody">
+Yes, it's &quot;Hello World&quot;, but also demonstrating classes, instance
+methods, memory management (no longer necessary with ObjC 2.x, which now
+has garbage collection), and using a few NeXTStep libraries.  An equivalent
+example in Java would probably be just as long.  But yes, ObjC's syntax is
+a bit scary, and I did deliberately make this example more complicated than
+it needed to be as a small jab against what seemed at the time (note this
+article is from almost 4 years ago) to be a rather anachronistic and
+downright ugly language.  But I'd say with garbage collection now I could
+probably overlook all that, and, as tempting as it would be to look to
+RubyCocoa or equivalent Python/Cocoa bindings, some people (e.g.
+http://theocacao.com/document.page/428/) have a point that Ruby/Python/etc
+don't really have much over ObjC in terms of features and--more
+importantly--clarity.<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Wed Apr 30th 2008, 11:48pm, Dan Morphis posted:
+</div>
+<div class="postingBody">
+Steve,  thank you for providing this article.  For me, it has help to clear
+up some of the basic things for me in regards to the objective-c
+language.<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Thu May 1st 2008, 4:35pm, Visitor posted:
+</div>
+<div class="postingBody">
+Hi Steve.<br />
+<br />
+Nice article.<br />
+<br />
+This line:<br />
+    HelloWorld *hw = [HelloWorld alloc];<br />
+<br />
+should be:<br />
+<br />
+    HelloWorld *hw = [[HelloWorld alloc] init];<br />
+<br />
+If you do not call init, you have broken the chain of initialization (the
+superclasses do not have a chance to perform initialization), and it is
+likely to cause problems at runtime. By just calling alloc, you have set
+aside a block of memory, and anything may be in it.<br />
+<br />
+<br />
+Aaron<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Thu May 1st 2008, 5:26pm, Steve Kehlet posted:
+</div>
+<div class="postingBody">
+Aaron, thanks for the fix!  I've updated the code above.<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Tue Jun 3rd 2008, 1:54pm, Guilherme Chapiewski posted:
+</div>
+<div class="postingBody">
+Pretty Cool :) Just to make it more complete, I think you should add
+something about compiling and/or running this code using XCode.<br />
+<br />
+gc<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Sat Jul 19th 2008, 2:38am, Visitor posted:
+</div>
+<div class="postingBody">
+Excelent article<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Fri Oct 3rd 2008, 11:30am, Douggs posted:
+</div>
+<div class="postingBody">
+Excelet post!!<br />
+<br />
+Can post here some example how do a GUI with object-c ?<br />
+<br />
+Thanks a lot,<br />
+<br />
+<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Fri Jan 16th 2009, 5:10am, BillyJo posted:
+</div>
+<div class="postingBody">
+What should you use to compile this? I understood MacOS X's gcc should work
+with Objective C - but:<br />
+<br />
+$ gcc main.m<br />
+Undefined symbols:<br />
+  &quot;.objc_class_name_NSAutoreleasePool&quot;, referenced from:<br />
+      literal-pointer@__OBJC@__cls_refs@NSAutoreleasePool in ccfLvrzh.o<br
+/>
+  &quot;.objc_class_name_HelloWorld&quot;, referenced from:<br />
+      literal-pointer@__OBJC@__cls_refs@HelloWorld in ccfLvrzh.o<br />
+  &quot;_objc_msgSend&quot;, referenced from:<br />
+      _main in ccfLvrzh.o<br />
+      _main in ccfLvrzh.o<br />
+      _main in ccfLvrzh.o<br />
+      _main in ccfLvrzh.o<br />
+      _main in ccfLvrzh.o<br />
+      _main in ccfLvrzh.o<br />
+      _main in ccfLvrzh.o<br />
+ld: symbol(s) not found<br />
+collect2: ld returned 1 exit status<br />
+<br />
+<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Fri Jan 16th 2009, 2:18pm, Steve Kehlet posted:
+</div>
+<div class="postingBody">
+It's been so long I can't remember...  I don't remember even if I used
+Xcode or the command line.  I found this site which might help:<br />
+<br />
+http://blog.lyxite.com/2008/01/compile-objective-c-programs-using-gcc.html<br
+/>
+<br />
+Looks like you have to do:<br />
+<br />
+gcc -o hello hello.m \<br />
+-L /System/Library/Frameworks/Foundation.framework/Foundation<br />
+<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Fri Feb 20th 2009, 2:06pm, Mina posted:
+</div>
+<div class="postingBody">
+The actual command to compile the above 3 files in the article is:<br />
+<br />
+gcc main.m HelloWorld.m -L
+/System/Library/Frameworks/Foundation.framework/Foundation -fobjc-gc-only
+-o main<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Tue Mar 3rd 2009, 10:10am, Steve Kehlet posted:
+</div>
+<div class="postingBody">
+Thanks Mina!<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Thu Mar 19th 2009, 9:05pm, Ade Barkah posted:
+</div>
+<div class="postingBody">
+It's better to use -framework:<br />
+<br />
+$ gcc main.m HelloWorld.m -framework Foundation -o hello<br />
+$ ./hello<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Fri Mar 20th 2009, 2:06pm, Steve Kehlet posted:
+</div>
+<div class="postingBody">
+Even better, thanks Ade!<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+<div class="posting">
+<div class="postingHeading">
+On Wed Sep 21st 2011, 4:47pm, Visitor posted:
+</div>
+<div class="postingBody">
+&quot;It's surprising my program didn't crash.&quot;<br />
+<br />
+Your program didn't crash because it has no state to initialize.<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+</div> <!-- postingsSheet -->
+<br />
+<br />
+<div class="newerOlderLinks">
+<a href="/articles/91.html">&lt;- 07/14/04: Goodbye, D-Link POS-2000 c...</a>
+ &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 
+<a href="/articles/89.html">06/27/04: Le Guin's The Farthest Shore -&gt;</a>
+</div> <!-- newerOlderLinks -->
+
+
+</td> <!-- content -->
+
+</tr>
+</table> <!-- main layout -->
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3386315-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+
+</body>
+</html>
+
+<!-- Generated on 2014/09/07 11:29am -->

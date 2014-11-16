@@ -1,0 +1,414 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+
+
+<title>
+Latest DNS Cache Poisoning Vulnerability Explained -- Steve Kehlet's Pages
+</title>
+<link rel="Stylesheet" href="/style.css" type="text/css" media="screen" />
+
+
+
+</head>
+
+<body>
+
+<!-- main layout -->
+<table id="main" border="0" cellspacing="0" cellpadding="0">
+<tr>
+
+<td id="nav">
+<div class="sidebarSheet">
+<div id="siteName"><a href="/">Steve Kehlet's Pages</a></div>
+<br />
+<a href="/docs/about.html">About</a>
+</div><!-- sidebarSheet -->
+
+
+<div class="sidebarSheet">
+<form method="get" action="http://www.google.com/search">
+<input type="hidden" name="sitesearch" value="www.kehlet.cx" />
+<input type="text" name="q" size="16" maxlength="255" />
+<input type="submit" name="btnG" value="Search" />
+</form>
+</div>
+
+
+<div id="articleListSheet">
+<div class="navHeader">Articles:</div>
+<div id="navList">
+<a href="/articles/197.html">02/24/11: It's Been a While</a><br />
+<a href="/articles/196.html">10/29/09: One-Way Notifications to Your ...</a><br />
+<a href="/articles/195.html">07/10/09: I &lt;3 Typography</a><br />
+<a href="/articles/193.html">03/30/09: Kean Coffee Open in Tustin</a><br />
+<a href="/articles/192.html">01/22/09: Here's Your 99 Cents Change...</a><br />
+<a href="/articles/190.html">09/18/08: Ruby GD2 and Gradients</a><br />
+<a href="/articles/189.html">09/17/08: Crashes Happen At the Worst ...</a><br />
+<a href="/articles/188.html">08/28/08: QotD: I think the pressure that...</a><br />
+<a href="/articles/187.html">08/14/08: Hello, JRuby Rack and Glass...</a><br />
+<a href="/articles/186.html">08/08/08: Handy tcpdump Expression to ...</a><br />
+<a href="/articles/185.html">08/07/08: Equal Suffering in JavaScript</a><br />
+<a href="/articles/184.html">07/25/08: Latest DNS Cache Poisoning ...</a><br />
+<a href="/articles/183.html">07/25/08: Handy Mac OS Instant Diction...</a><br />
+<a href="/articles/182.html">07/18/08: My Bloody Valentine are Back</a><br />
+<a href="/articles/178.html">06/17/08: Safari + GreaseKit + Auto B...</a><br />
+<a href="/articles/174.html">06/16/08: Ruby Sequel</a><br />
+<a href="/articles/173.html">04/25/08: JRuby Overview Video</a><br />
+<a href="/articles/171.html">04/24/08: Email Subscribers, Please Si...</a><br />
+<a href="/articles/169.html">02/29/08: I Hate Date Processing</a><br />
+<a href="/articles/168.html">02/27/08: No Pickle</a><br />
+<a href="/articles/166.html">02/07/08: 241 Toll Road Expansion Stop...</a><br />
+<a href="/articles/163.html">02/04/08: Mail Folders Under Inbox, Pa...</a><br />
+<a href="/articles/160.html">12/12/07: Coding Horror</a><br />
+<a href="/articles/159.html">12/10/07: Eliminating Vibrant Popup Ads</a><br />
+<a href="/articles/158.html">11/02/07: Gmail IMAP and Folders Und...</a><br />
+<a href="/articles/157.html">10/26/07: A Thousand (or More!) Words ...</a><br />
+<a href="/articles/156.html">09/27/07: iPhone Still Doesn't Play G.7...</a><br />
+<a href="/articles/155.html">09/26/07: Mac OS X Mail, iPhone, and ...</a><br />
+<a href="/articles/154.html">08/17/07: The Every 55 Minute Cell Ph...</a><br />
+<a href="/articles/151.html">05/29/07: Using Google Apps for Spam...</a><br />
+<a href="/articles/149.html">05/25/07: Fixing DST on my aging Ope...</a><br />
+<a href="/articles/148.html">03/10/07: Annoying &quot;Rapid-Fire&quot; AIM syn...</a><br />
+<a href="/articles/147.html">01/04/07: What the Grinch Got Right</a><br />
+<a href="/articles/146.html">10/05/06: Meeting Martin Diedrich at Ke...</a><br />
+<a href="/articles/145.html">09/20/06: From the entire Diedrich Cof...</a><br />
+<a href="/articles/143.html">04/18/06: Stuck With Your Mistakes For...</a><br />
+<a href="/articles/142.html">04/15/06: Dishwasher Debacle</a><br />
+<a href="/articles/140.html">02/21/06: MacBook Pro is Here!</a><br />
+<a href="/articles/138.html">01/04/06: New Powerbook memory works!</a><br />
+<a href="/articles/136.html">11/01/05: An Outsourced Life</a><br />
+<a href="/articles/135.html">10/28/05: The New &quot;On Call&quot;</a><br />
+<a href="/articles/134.html">09/08/05: iPod nano</a><br />
+<a href="/articles/131.html">07/10/05: A World of Warcraft Moment</a><br />
+<a href="/articles/129.html">06/03/05: Keeping Your SSH Sessions ...</a><br />
+<a href="/articles/127.html">05/18/05: When Bees Attack</a><br />
+<a href="/articles/124.html">05/17/05: San Diego Trip</a><br />
+<a href="/articles/125.html">05/07/05: Garage Wiring Cleanup</a><br />
+<a href="/articles/122.html">03/27/05: Spring Ahead, Fall Flat</a><br />
+<a href="/articles/121.html">03/27/05: Google woes</a><br />
+<a href="/articles/120.html">03/20/05: Knights of the Old Republic II</a><br />
+<a href="/articles/118.html">03/20/05: Eternal Sunshine of the Spotl...</a><br />
+<a href="/articles/119.html">03/13/05: Shred Fest</a><br />
+<a href="/articles/116.html">02/20/05: Web Site Moved (Again)</a><br />
+<a href="/articles/112.html">02/17/05: Tivo on the Home Network</a><br />
+<a href="/articles/113.html">02/12/05: Half Life 2</a><br />
+<a href="/articles/111.html">01/30/05: Home Wiring Project, Part Deux</a><br />
+<a href="/articles/110.html">01/09/05: Supersize Your Tivo</a><br />
+<a href="/articles/109.html">01/09/05: Holiday Food Photo Roundup</a><br />
+<a href="/articles/108.html">01/09/05: The Battle for Middle Earth</a><br />
+<a href="/articles/107.html">01/03/05: CAPTCHA</a><br />
+<a href="/articles/106.html">12/24/04: Parking Lot Rage</a><br />
+<a href="/articles/105.html">12/19/04: The Blither of Earthsea</a><br />
+<a href="/articles/99.html">11/09/04: Tuning TCP for High Bandwi...</a><br />
+<a href="/articles/102.html">10/31/04: San Andreas</a><br />
+<a href="/articles/101.html">10/17/04: The PStwo arrives for Gran...</a><br />
+<a href="/articles/100.html">10/17/04: Look ma!  No PHP!</a><br />
+<a href="/articles/98.html">10/04/04: I, robot.c</a><br />
+<a href="/articles/97.html">09/28/04: Fable</a><br />
+<a href="/articles/96.html">09/26/04: Up 401 days!</a><br />
+<a href="/articles/95.html">09/26/04: Computer Upgrade Nightmare</a><br />
+<a href="/articles/94.html">08/09/04: Beautiful Colorado Country</a><br />
+<a href="/articles/93.html">07/25/04: Windows XP: Insecure By Def...</a><br />
+<a href="/articles/92.html">07/21/04: Mattern Sausage &amp; Meat</a><br />
+<a href="/articles/91.html">07/14/04: Goodbye, D-Link POS-2000 c...</a><br />
+<a href="/articles/90.html">07/11/04: Hello, Objective C</a><br />
+<a href="/articles/89.html">06/27/04: Le Guin's The Farthest Shore</a><br />
+<a href="/articles/88.html">06/20/04: Same Old Stuff, new look and...</a><br />
+<a href="/articles/87.html">06/14/04: Ultima V: Revisiting an Old F...</a><br />
+<a href="/articles/86.html">05/31/04: Home Wiring Project</a><br />
+<a href="/articles/85.html">05/23/04: Goodbye Sendmail, hello Post...</a><br />
+<a href="/articles/84.html">04/25/04: Tivo 1 meets Tivo 2</a><br />
+<a href="/articles/83.html">04/20/04: Dan Brown's The DaVinci Code</a><br />
+<a href="/articles/79.html">03/14/04: Subnetting is Fun</a><br />
+<a href="/articles/81.html">03/06/04: What's up with &quot;The Quick Bro...</a><br />
+<a href="/articles/80.html">03/06/04: Immortalize your handwriting</a><br />
+<a href="/articles/78.html">02/25/04: Web site moved</a><br />
+<a href="/articles/77.html">02/14/04: Hacking TCP/IP with tcpping</a><br />
+<a href="/articles/76.html">02/07/04: Stopping image leechers</a><br />
+<a href="/articles/70.html">02/07/04: Morrowind Modding</a><br />
+<a href="/articles/68.html">01/28/04: Infrastructure Guy</a><br />
+<a href="/articles/67.html">01/28/04: Brand new year and ...</a><br />
+<a href="/articles/66.html">11/28/03: Dan Brown's Angels and Dem...</a><br />
+<a href="/articles/65.html">11/28/03: Thanksgiving 2003</a><br />
+<a href="/articles/64.html">11/08/03: Knights of the Old Republic</a><br />
+<a href="/articles/63.html">11/08/03: 10 years of Linux</a><br />
+<a href="/articles/55.html">11/06/03: Morrowind: The (Immersive) Q...</a><br />
+<a href="/articles/61.html">09/01/03: Trip to Berkeley</a><br />
+<a href="/articles/60.html">08/25/03: Goodbye UW-imapd, hello Maild...</a><br />
+<a href="/articles/59.html">08/17/03: Massive Cox Outage</a><br />
+<a href="/articles/54.html">07/03/03: The Latest Move in Cox's Ar...</a><br />
+<a href="/articles/53.html">05/01/03: Reading Binge, Part II: Rende...</a><br />
+<a href="/articles/51.html">04/28/03: Reading Binge, Part I: A Wiza...</a><br />
+<a href="/articles/52.html">04/20/03: Fun with Tengwar</a><br />
+<a href="/articles/50.html">04/19/03: Crown moulding project</a><br />
+<a href="/articles/49.html">04/19/03: One year of Macintosh and M...</a><br />
+<a href="/articles/46.html">04/18/03: My new site</a><br />
+<a href="/articles/45.html">04/09/03: Weblog development</a><br />
+<a href="/articles/19.html">04/09/03: Dual 1Ghz Ultra Sparc III, 2...</a><br />
+<a href="/articles/15.html">02/15/03: Guest Room Painted</a><br />
+<a href="/articles/14.html">02/15/03: FTC's national &quot;do not call&quot; re...</a><br />
+<a href="/articles/13.html">02/15/03: Unix: Quick and easy to install...</a><br />
+<a href="/articles/8.html">02/15/03: The Collapse of Inconvenience</a><br />
+<a href="/articles/4.html">02/11/03: Primer Goodness</a><br />
+<a href="/articles/7.html">01/18/03: Chicken Dinner</a><br />
+<a href="/articles/16.html">01/16/03: Water heater disaster</a><br />
+</div> <!-- navList -->
+</div> <!-- articleListSheet -->
+
+<p>
+<a href="http://validator.w3.org/check?uri=referer"><img
+   src="http://www.w3.org/Icons/valid-xhtml10"
+   alt="Valid XHTML 1.0!" height="31" width="88" /></a>
+</p>
+
+<div id="finePrint">
+Steve Kehlet's Pages <br />
+Copyright (c) 2003-2014 Steven Kehlet
+</div>
+
+
+</td> <!-- nav -->
+
+<td valign="top"> <!-- content -->
+
+<br />
+
+
+<div class="newerOlderLinks">
+<a href="/articles/185.html">&lt;- 08/07/08: Equal Suffering in JavaScript</a>
+ &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 
+<a href="/articles/183.html">07/25/08: Handy Mac OS Instant Diction... -&gt;</a>
+</div> <!-- newerOlderLinks -->
+<div id="sheet">
+
+<div id="articleHeading">
+Latest DNS Cache Poisoning Vulnerability Explained
+</div>
+
+<div id="articleSubtitle">
+Fri Jul 25th 2008, 5:46pm
+
+</div> <!-- articleSubtitle -->
+<div id="articleBody">
+The recent, urgent news about the majority of the Internet's DNS system being vulnerable
+to poisoning attacks have been all over the <a
+href="http://news.google.com/news?hl=en&ned=us&q=dns+exploit&btnG=Search+News">news</a>. 
+At the high level, the vulnerability is that tons of existing, publicly accessible DNS
+servers can be tricked fairly easily, using readily available exploit scripts, into
+storing and serving up bogus DNS information, and that people could thus be unknowingly
+tricked into accessing malicious sites and, say, possibly compromise their sensitive
+information (e.g. entering credentials at a fake wellsfargo.com). Note for any
+HTTPS-enabled site it would still be fairly obvious that you are not accessing the real
+site because your browser would detect and alert you of the invalid certificates--however,
+ultimately it is still left to the user's discretion to recognize the danger when the
+browser warns him or her, instead of just clicking "proceed anyway".
+
+<br />
+<br />
+
+Poisoning DNS servers is nothing new.  However this particular exploit is far more
+feasible and dangerous than its predecessors.  Credit is generally given to <a
+href="http://www.doxpara.com">Dan Kaminsky</a> for raising awareness of the criticality of
+this issue and coordinating a massive effort with vendors to issue patches.  He gave the
+vendors time to make patches, then the public time to apply them before publicly releasing
+all the details.  In admirably white hat fashion, he did everything altruistically and
+"right".  Kudos.
+
+<br />
+<br />
+
+The exploit builds off the old trick of spoofing replies back to the requesting name
+server.  
+The challenges for the attacker are:
+
+<ol>
+<li>Knowing when a DNS server is issuing a particular DNS lookup,</li>
+<li>Guessing the DNS query's transaction ID (the spoofed reply must have a transaction ID
+matching what was used in the original query),</li>
+<li>Creating a proper spoofed packet with poisoned information in it, and</li>
+<li>Getting the spoofed response to the requester before the real response comes
+back.</li>
+</ol>
+
+How can an attacker overcome these challenges?
+
+<ol>
+<li>#1 is a real challenge since a DNS server will only perform a name lookup every once
+in a while (every Time To Live [TTL], usually hours or days).  If the server doesn't
+already have a name cached, you know you can try to spoof the response right then, but you
+only get one shot.</li>
+<li>#2 is not as hard, theoretically it should be possible to blast back 65,536 spoofed
+responses (one for each transaction ID).  The fact this ID is only 16 bit is generally
+accepted as being too weak.</li>
+<li>For #3, the vulnerable DNS servers in question reuse the same source port for every
+outgoing request, which makes crafting the spoofed return UDP packets trivial (<i>DNS
+servers that already randomized the source port are generally seen as being practically
+immune to this exploit, since attackers would have to guess nearly 2^32 combinations
+instead of only 65,536</i>). 
+<li>For #4, optional "good netizen" ISP egress filtering may stop spoofed packets.  And
+latency may work against an attacker.  But an attacker attacking his own ISP might not
+face either of these problems.
+</ol>
+
+Overall, an attacker would need an insane amount of patience and luck to pull this off.
+
+<br />
+<br />
+
+The two twists with the new exploit are that it overcomes challenge #1, and indirectly
+poisons the DNS server through the use of additional Resource Records (RRs).  (<i>Side
+note: as another security precaution, RRs are only trusted in a response if they're in the
+same "bailiwick", or domain, as the name requested (i.e. you can't poison a server with
+bad RRs for someone else's domain, say yahoo.com,  if the lookup was for google.com). 
+However this is not an issue at all for this particular exploit.</i>).  The attacker
+repeatedly asks the victim DNS server for tons of different lookups for subdomains of the
+desired name to spoof (1.google.com, 2.google.com, 3.google.com, etc), blasts tons of
+spoofed responses back hoping one transaction ID will match, and in each response adds an
+additional, poisoned RR, containing the name to spoof and whatever IP address the attacker
+desires.
+
+<br />
+<br />
+
+Example:
+
+<ol>
+<li>Attacker asks Victim DNS Server: who is 1.google.com?</li>
+<li>Victim DNS server asks the authority for google.com, who is 1.google.com?</li>
+<li>Attacker blasts Victim with spoofed responses, each containing a different transaction
+ID.  The packet contains a response with an IP for 1.google.com, as well as an additional
+RR stating www.google.com is an IP address of the Attacker's choosing.</li>
+<li>(Here is the exploit) If a valid, spoofed response is received before the real
+response comes back, the Victim updates its cache with both the requested info <i>as well
+as the poisonous IP information contained in the RR</i>.  The subsequent response from the
+authority for google.com is discarded.</li>
+</ol>
+
+This is repeated as necessary, with new subdomain requests, until one of the spoofed
+responses takes.  When it takes, the attacker has circumvented the TTL problem and
+outsmarted the bailiwick defense.  Reports are this can happen in less than 10 minutes.
+
+<br />
+<br />
+
+10 minutes to replace cnn.com, or youtube.com, or any other popular site with a site of
+your own choosing.  Defame a site, get people to read your manifesto or see something
+embarrassing or obscene, or try to phish for their personal information.  Yes, this really
+is a big deal--yes, only for the people using the victimized DNS server, but if an
+attacker were able to target DNS servers at several large ISPs, it could have a huge
+impact.
+
+<br />
+<br />
+
+If the above wasn't clear enough, I would recommend reading <a
+href="http://beezari.livejournal.com/141796.html">this copy of someone leaking the
+information</a> before it should have been publicly disclosed (it has been <a
+href="http://www.google.com/search?hl=en&q=Poisoning+CXOPQ.VICTIM.COM+is+not+super+valuable+to+Mallory">mirrored
+everywhere</a>).  While it's not perfect (enough with the deli analogy), it does explain
+the problem fairly well.
+
+<br />
+<br />
+
+Also <a href="http://www.securiteam.com/exploits/5EP0M15OUQ.html">this sample exploit
+code</a> provides a good technical summary of what the problem is and how it works.  It's
+worth reading through the code to get a feel for how it all works.  I particularly like
+the technique in cmd_check() of discovering what port your DNS server uses to make
+requests (issuing a TXT lookup to spoofprobe-check-x-xxxxxx.red.metasploit.com, which
+returns a value of hostname:port).
+
+<blockquote>
+This exploit attacks a fairly ubiquitous flaw in DNS implementations which
+Dan Kaminsky found and disclosed ~Jul 2008. This exploit caches a single
+malicious host entry into the target nameserver by sending random sub-domain
+queries to the target DNS server coupled with spoofed replies to those
+queries from the authoritative nameservers for the domain which contain a
+malicious host entry for the hostname to be poisoned in the authority and
+additional records sections. Eventually, a guessed ID will match and the
+spoofed packet will get accepted, and due to the additional hostname entry
+being within bailiwick constraints of the original request the malicious host
+entry will get cached.
+</blockquote>
+
+<br />
+
+So what's the fix?  There really is no fix, short of <a
+href="http://www.isc.org/index.pl?/sw/bind/index.php">using DNSSEC</a>, or moving to some
+other cryptographic method of trust.  <a
+href="http://blogs.zdnet.com/security/?p=1552">Using TCP instead of UDP</a> has come up
+(this would add the additional, now nearly impossible challenge of guessing sequence
+numbers), but was shot down as being too resource intensive.  So the accepted workaround
+is what was already mentioned above: DNS servers should <a
+href="http://www.circleid.com/posts/87143_dns_not_a_guessing_game/">randomize their source
+ports</a>.  Then attackers would have a much, much harder time spoofing the return
+packets.  There appears to be <a
+href="http://www.mail-archive.com/cryptography@metzdowd.com/msg09466.html">some
+reaction</a> that this is old news, and many DNS server implementations had already done
+this, long ago.  Just not the big ones :-) (e.g. BIND).
+
+<br />
+<br />
+
+Finale: Patches for all affected DNS servers should be up by now.  Be sure to patch your
+systems.
+
+<br />
+<br />
+<i>Update 6:12pm:</i> <a href="http://www.caughq.org/exploits/CAU-EX-2008-0003.txt">a
+newer version of the example exploit code</a> demonstrates how to replace NS records for
+an entire domain (vs. a single A record).
+</div>
+</div> <!-- sheet -->
+
+<br /><br /><br />
+<div id="postingsSheet">
+<div class="postingHeader">
+Visitor comments
+</div>
+<div class="posting">
+<div class="postingHeading">
+On Mon Jul 28th 2008, 8:04am, Oscar posted:
+</div>
+<div class="postingBody">
+Thanks for explaining this. I hope its as useful for others as it was for
+me.<br />
+
+</div><!-- postingBody -->
+</div><!-- posting -->
+<br />
+<br />
+
+</div> <!-- postingsSheet -->
+<br />
+<br />
+<div class="newerOlderLinks">
+<a href="/articles/185.html">&lt;- 08/07/08: Equal Suffering in JavaScript</a>
+ &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 
+<a href="/articles/183.html">07/25/08: Handy Mac OS Instant Diction... -&gt;</a>
+</div> <!-- newerOlderLinks -->
+
+
+</td> <!-- content -->
+
+</tr>
+</table> <!-- main layout -->
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3386315-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+
+</body>
+</html>
+
+<!-- Generated on 2014/09/07 11:29am -->
